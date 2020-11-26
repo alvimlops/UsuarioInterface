@@ -1,0 +1,35 @@
+<p-messages [(value)]="msgs"></p-messages>
+<p-fieldset legend="Informações">
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-6 p-lg-12">
+            <label for="nome">Nome</label>
+            <input id="nome" [(ngModel)]="nome" type="text"  pattern="[A-Za-z]{3}" placeholder="{{nome}}" pInputText required>
+        </div>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-6 p-lg-12">
+            <label for="cpf">CPF</label>
+            <input id="cpf" [(ngModel)]="cpf" type="text" [disabled]="true" mask="000.000.000-00" placeholder="{{cpf}}" pInputText required>
+        </div>
+       
+        <div class="p-field p-col-12 p-md-4 p-lg-12">
+            <label for="senha">senha</label>
+            <input id="senha" [(ngModel)]="senha" type="text" placeholder="{{senha}}" pInputText required>
+        </div>
+        <div class="p-field p-col-12 p-md-4 p-lg-12">
+            <label for="data_nascimento">Data de Nascimento</label>
+            <input id="data_nascimento" [(ngModel)]="data_nascimento" type="text" mask="00/00/0000" placeholder="{{data_nascimento}}" pInputText required>
+            
+        </div>
+    </div>
+     
+ <div class="p-grid " style="padding: 20px;">
+        <div class="p-col-12 p-md-4 p-lg-4">
+            <button pButton type="button" class="p-button-raised p-button-success" label="Salvar" icon="pi pi-check"
+                (click)="salvar()"></button>
+ 
+              <button pButton type="button" class="p-button-raised p-button-danger" label="Cancelar" icon="pi pi-times"
+                [routerLink]="['/home']" style="left: 20px;"></button>
+        </div>
+    </div>
+</p-fieldset>

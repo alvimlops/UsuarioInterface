@@ -1,0 +1,71 @@
+<p-messages [(value)]="msgs"></p-messages>
+<div class="card ">
+    <p-table #dt [value]="usuarios" dataKey="id" [rowHover]="true" [rows]="10" [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
+        currentPageReportTemplate="Mostrando {first} ao {last} a {totalRecords} de registros" [filterDelay]="0"
+        [globalFilterFields]="['nome','cpf']" [resizableColumns]="true" [autoLayout]="true">
+        <ng-template pTemplate="caption">
+            <div class="table-header">
+                Lista de Usuarios
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                        placeholder="Pesquisa Global" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <p-table></p-table>
+            <tr>
+                <th style="width: 3rem"></th>
+                <th pSortableColumn="nome">Nome<p-sortIcon field="nome"></p-sortIcon>
+                </th>
+                <th pSortableColumn="cpf">CPF<p-sortIcon field="cpf"></p-sortIcon>
+                </th>
+                 <th></th>
+                <th style="width: 8rem"></th>
+            </tr>
+            <tr>
+                <th> </th>
+                <th>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'nome', 'contains')"
+                        placeholder="Pesquisa por Nome" class="p-column-filter">
+                </th>
+                <th>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'cpf', 'contains')"
+                        placeholder="Pesquisa por CPF" class="p-column-filter">
+                </th>
+                 
+                <th></th>
+                <th></th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-usuario>
+            <tr class="p-selectable-row">
+                <td></td>
+                <td>
+                    {{usuario.nome}}
+                </td>
+                <td>
+                    {{usuario.cpf}}
+                </td>
+                
+                  <td style="text-align: center">
+                    <button pButton type="button" class="p-button-raised p-button-primary" label="Editar" icon="pi pi-user-edit"
+                        [routerLink]="['/usuario-editar',usuario.id]"></button>
+                </td>
+                <td style="text-align: center">
+                    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+                    <button pButton type="button" class="p-button-raised p-button-danger" label="Excluir"
+                        icon="pi pi-trash" (click)="deletaUsuario(usuario.id) "></button>
+                </td>
+
+            </tr>
+            <tr></tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="8">Nenhum usuario encontrado.</td>
+            </tr>
+        </ng-template>
